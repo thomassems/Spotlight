@@ -1,6 +1,10 @@
 {
+    "manifest_version": 3,
     "name": "Productivity Extension",
-    "version": "0.1.0",
-    "description": "Prevents access to non-productive websites",
-    "permissions": ["tabs"],
+    "description": "Blocks access to non-productive websites",
+    "version": "1.0",
+    "action": {
+        "default_popup": "productivity.html",
+        "default_icon": "/images/extension.jpg"
+    }
 }
