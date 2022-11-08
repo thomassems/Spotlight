@@ -10,8 +10,13 @@
     "icons": {
         "32": "images/extension.jpg"
     },
-    "chrome_url_overrides": {
-        "newtab": "https://www.google.com/search?q=nhl+scores&oq=nhl+scores&aqs=chrome.0.35i39j0i131i433i512l5j0i512j0i131i433i512j0i512l2.1334j0j7&sourceid=chrome&ie=UTF-8#cobssid=s"
-    }
-    
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage",
+        "scripting"
+    ]
 }
