@@ -1,10 +1,17 @@
 {
     "manifest_version": 3,
     "name": "Productivity Extension",
-    "description": "Blocks access to non-productive websites",
+    "description": "Blocks access to time wasting websites such as Youtube, Netflix, and Reddit. When you try to access these websites, you're automatically redirected to a motivational video",
     "version": "1.0",
     "action": {
         "default_popup": "productivity.html",
         "default_icon": "/images/extension.jpg"
+    },
+    "icons": {
+        "32": "images/extension.jpg"
+    },
+    "chrome_url_overrides": {
+        "newtab": "https://www.google.com/search?q=nhl+scores&oq=nhl+scores&aqs=chrome.0.35i39j0i131i433i512l5j0i512j0i131i433i512j0i512l2.1334j0j7&sourceid=chrome&ie=UTF-8#cobssid=s"
     }
+    
 }
