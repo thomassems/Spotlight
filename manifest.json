@@ -1,22 +1,17 @@
 {
     "manifest_version": 3,
     "name": "Productivity Extension",
-    "description": "Blocks access to time wasting websites such as Youtube, Netflix, and Reddit. When you try to access these websites, you're automatically redirected to a motivational video",
     "version": "1.0",
     "action": {
-        "default_popup": "productivity.html",
-        "default_icon": "/images/extension.jpg"
+        "default_icon": {
+            "16": "images/default.png"
+        },
+        "default_title": "Productivity Extension is enabled",
+        "default_popup": "popup.html"
     },
-    "icons": {
-        "32": "images/extension.jpg"
-    },
-    "background": {
-        "service_worker": "background.js"
-    },
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "storage",
-        "scripting"
-    ]
+    "description": "Blocks access to time wasting websites such as Youtube, Netflix, and Reddit. \n    When you try to access these websites, you're automatically redirected to a motivational video"
+    //"permissions": [
+        //"webNavigation",
+        //"declarativeNetRequest"
+    //]
 }
