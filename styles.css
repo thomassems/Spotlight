@@ -1,7 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-image: linear-gradient(90deg, rgb(5, 250, 169), turquoise);
+    background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
     color: white;
     text-align: center;
 }
@@ -10,10 +10,9 @@ body {
 .navbar {
     background-color: white;
     color: white;
-    font-size: 60px;
-    padding: 50px;
-    margin: 0px;
-    border: 5px;
+    font-size: 50px;
+    padding: 40px;
+    margin: 0px, 0px;
 }
 
 .navbar .name {
@@ -27,20 +26,41 @@ body {
 }
 
 .navbar .logo {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 }
 
 .searchbar {
-    margin-top: 20px;
-    background-color: white;
-    border-color: black;
+    margin-top: 50px;
+    background-image: linear-gradient(90deg, pink, pink);
+    border-color: white;
     font-size: 20px;
-    color: black;
+    color: white;
+    border-width: 3px;
 }
 
-.popup {
+.popup-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+}
+
+.popup-title {
     background-color: white;
-    color: yellow;
-    margin-bottom: 0px;
+    color: turquoise;
+    font-size: 28px;
+    padding: 30px;
+}
+
+.settings-button {
+    background-color: transparent;
+    color: white;
+    border: 0px;
+    font-size: 24px;
+    padding: 10px;
+    font-weight: 2px;
+    flex-basis: 100%;
+    cursor: pointer;
 }
