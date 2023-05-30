@@ -2,16 +2,17 @@ body {
     margin: 0px;
     padding: 0px;
     background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
+    background-color: white;
     color: white;
     text-align: center;
 }
 
 
 .navbar {
-    background-color: white;
+    background-color:white;
     color: white;
     font-size: 50px;
-    padding: 40px;
+    padding: 20px;
     margin: 0px, 0px;
 }
 
@@ -21,7 +22,7 @@ body {
     -webkit-text-fill-color: transparent; 
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     
 }
 
@@ -30,13 +31,17 @@ body {
     height: 50px;
 }
 
-.searchbar {
+.search {
     margin-top: 50px;
-    background-image: linear-gradient(90deg, pink, pink);
-    border-color: white;
+    background-image: linear-gradient(90deg, white, white);
+    border-color: darkgreen;
     font-size: 20px;
-    color: white;
+    color: turquoise;
     border-width: 3px;
+}
+
+.search.button {
+    cursor: pointer;
 }
 
 .popup-container {
@@ -52,6 +57,7 @@ body {
     color: turquoise;
     font-size: 28px;
     padding: 30px;
+    border-color: black;
 }
 
 .settings-button {
@@ -63,4 +69,31 @@ body {
     font-weight: 2px;
     flex-basis: 100%;
     cursor: pointer;
+}
+
+
+.websites {
+    font-size: 25px;
+    line-height: 50px;
+    color: black;
+}
+
+li:hover {
+    opacity: 40%;
+    cursor: pointer;
+    background-image: url("images/x-mark.png");
+    background-size: 30px;
+}
+
+.search.button:hover {
+    color: black;
+}
+
+li {
+    padding: 0px 0px 0px 0px;
+    list-style: none;
+    background-image: url("images/checkmark.png");
+    background-repeat: no-repeat;
+    background-position: 70%;
+    background-size: 40px;
 }

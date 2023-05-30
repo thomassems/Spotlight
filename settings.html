@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Productivity Extension - Settings</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts/main.js" defer></script>
 </head>
 <body>
     <div class="navbar">
         <div class="name">Productivity Extension</div>
-        <img src="images/default.png" class = "logo">
+        <img src="images/logo.png" alt="Logo" class="logo">
     </div>
-    <div class="grad">
-    <input type="text" class="searchbar">
-    <button class="searchbar">Add Website</button>
-    </div>
+    <form id="form">
+    <input type="text" id="userInput" class="search">
+    <button id="buttonClick" class="search button">Add Website</button>
+    </form>
+    <ul class="websites">
+        <li id="Netflix">netflix.com</li>
+        <li>twitter.com</li>
+        <li>instagram.com</li>
+    </ul>
 </body>
 </html>

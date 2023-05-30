@@ -4,13 +4,13 @@
     "version": "1.0",
     "action": {
         "default_icon": {
-            "16": "images/default.png"
+            "16": "images/logo.png"
         },
         "default_title": "Productivity Extension is enabled",
         "default_popup": "popup.html"
     },
-    "description": "Blocks access to time wasting websites such as Youtube, Netflix, and Reddit. \n    When you try to access these websites, you're automatically redirected to a motivational video"
-    //"permissions": [
+    "description": "Blocks access to time wasting websites. When you try to access a specified non-productive website, you're automatically redirected to a meme telling you to get back to work."
+    // "permissions": [
         //"webNavigation",
         //"declarativeNetRequest"
     //]
