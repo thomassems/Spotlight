@@ -23,44 +23,53 @@ function websiteClick(website) {
     });
     }
 
+function websitePrefix(prefix) {
+    if (prefix === '') {
+        return null;
+    }
+    let pre = '';
+    for (i = 0; i < prefix.length; i++) {
+        pre += prefix[i];
+        if (prefix[i] === '/') {
+            pre = '';
+        }
+    }
+    return pre;
+}
+
+function websiteSuffix(suffix) {
+    if (suffix === '') {
+        return null;
+    }
+    let suff = '';
+    for (i = 0; i < suffix.length; i++) {
+        if (suffix[i] === '/') {
+            break;
+        }
+        suff += suffix[i]
+    }
+    return suff;
+}
+
 function websiteValidater(website) {
     if (website === '') {
         return null;
-    } 
+    }
     else {
         const indexOfDot = website.indexOf('.');
         if (indexOfDot === -1) {
             return null;
-        } 
-        else {
-            let website_string = '';
-            const beforeDot = website.slice(0, indexOfDot);
-            const afterDot = website.slice(indexOfDot + 1);
-            for (i = 0; i < beforeDot.length; i++) {
-                website_string += beforeDot[i];
-                if (beforeDot[i] === '/') {
-                    website_string = '';
-                }
-            }
-            if (website_string === '') {
-                return null;
-            } 
-            website_string += '.';
-            const copy = website_string;
-            for (j = 0; j < afterDot.length; j++) {
-                if (afterDot[j] === '/') {
-                    break;
-                };
-                website_string += afterDot[j];
-            }
-            if (website_string === copy) {
-                return null;
-            }
-            return website_string;
         }
+        const beforeDot = website.slice(0, indexOfDot);
+        const afterDot = website.slice(indexOfDot + 1);
+        const prefix = websitePrefix(beforeDot);
+        const suffix = websiteSuffix(afterDot);
+        if (prefix === null || suffix === null) {
+            return null;
+        }
+        return prefix + '.' + suffix;
     }
-
-};
+}
 
 const text = document.getElementById("userInput");
 const btn = document.getElementById("buttonClick");
