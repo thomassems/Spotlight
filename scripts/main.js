@@ -12,36 +12,62 @@ document.querySelectorAll('li').forEach(item => {
 });
 
 function websiteValidaterandTruncater(website) {
-    // need to check if it starts with http, and if it does, then the website name starts after the first "."
-    // otherwise the website starts at the beginning of the text
-    // no matter what, website ends at the character before a backslash if there is one, and if it starts at http, then
-    // this function will be called upon when determining whether a website should be added or not, and it's value will be used
-    // as an element in the webpage
     if (website === '') {
         return null;
+    } 
+    else {
+        const indexOfDot = website.indexOf('.');
+        if (indexOfDot === -1) {
+            return null;
+        } 
+        else {
+            let website_string = '';
+            const beforeDot = website.slice(0, indexOfDot);
+            const afterDot = website.slice(indexOfDot + 1);
+            for (i = 0; i < beforeDot.length; i++) {
+                if (beforeDot[i] === '/') {
+                    website_string = '';
+                }
+                else {
+                    website_string += beforeDot[i]
+                }
+            }
+
+            website_string += '.';
+
+            for (j = 0; j < afterDot.length; j++) {
+                if (afterDot[j] === '/') {
+                    break;
+                };
+                website_string += afterDot[j];
+            }
+            return website_string;
+        }
     }
 
-}
+};
 
 const text = document.getElementById("userInput");
 const btn = document.getElementById("buttonClick");
-
-
 function addWebsite() {
     const output = document.getElementById("output");
-    // const website = websiteValidaterandTruncater(text.value)
-    // if website === null || websiteSet.had(website) {
-    if (text.value === '' || websiteSet.has(text.value) || websiteValidaterandTruncater(text.value) === null) {
-        output.innerHTML = `Please provide a valid website`;
+    const website = websiteValidaterandTruncater(text.value);
+    console.log(website);
+    if (website === null) {
+        output.innerHTML = "Please provide a valid website";
+    }
+    else if (websiteSet.has(website)) {
+        output.innerHTML = "This website is already included in the blocklist";
     }
     else {
         var node = document.createElement('li');
-        node.appendChild(document.createTextNode(text.value));
+        node.appendChild(document.createTextNode(website));
         document.querySelector('ul').appendChild(node);
-        output.innerHTML = `${text.value} was successfully added to the website blocklist`;
-        websiteSet.add(text.value);
+        output.innerHTML = `${website} was successfully added to the website blocklist`;
+        websiteSet.add(website);
     }
 };
+
 btn.addEventListener("click", addWebsite);
 
 const form = document.getElementById("form"); // works but should try to change it so you can add websites to blocklist using return key
