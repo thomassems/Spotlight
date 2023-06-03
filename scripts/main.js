@@ -1,27 +1,25 @@
 const websiteSet = new Set(["netflix.com", "twitter.com", "instagram.com"]);
 
-// should maybe fix this, but this adds an event listener to the default websites
 document.querySelectorAll('li').forEach(item => {
      item.addEventListener("click", () => {
-        const content = item.textContent;
-        let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
-        if (result === true) {
-            websiteSet.delete(content);
-            item.remove();
-        }
+        clickedWebsite(item);
     })
 });
 
 function websiteClick(website) {
     website.addEventListener("click", () => {
-    const content = website.textContent;
-    let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
-    if (result === true) {
-        websiteSet.delete(content);
-        website.remove();
-        }
+        clickedWebsite(website);
     });
-    }
+}
+
+function clickedWebsite(websiteObj) {
+    const content = websiteObj.textContent;
+    let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
+        if (result === true) {
+            websiteSet.delete(content);
+            websiteObj.remove();
+        }
+}
 
 function websitePrefix(prefix) {
     if (prefix === '') {
