@@ -1,0 +1,60 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
+    background-color: white;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    background-color: rgb(228, 227, 227);
+    margin: 20px;
+}
+
+.title {
+    background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
+    color: white;
+    font-size: 32px;
+    padding: 5px;
+}
+
+.settings-button {
+    background-color: rgb(228, 227, 227);
+    color: white;
+    border: 0px;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search.button:hover {
+    color: black;
+}
+
+.timer {
+    padding: 20px;
+    background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
+}
+
+.on {
+    background-color: pink;
+    cursor: pointer;
+    padding: 5px, 10px;
+    border-color: white;
+    border-width: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+input::placeholder {
+    font-size: 15px;
+}
+
+
+/* also will need to display a timer somewhere, after the on button is clicked */

@@ -33,7 +33,7 @@ body {
 
 .search {
     margin-top: 50px;
-    background-image: linear-gradient(90deg, white, white);
+    background-color: white;
     border-color: darkgreen;
     font-size: 20px;
     color: turquoise;
@@ -44,30 +44,16 @@ body {
     cursor: pointer;
 }
 
-.popup-container {
-    display: flex;
-    flex-direction: column;
-    font-size: 30px;
-    flex-wrap: wrap;
-    flex-basis: 100%;
-}
-
-.popup-title {
-    background-color: white;
-    color: turquoise;
-    font-size: 28px;
-    padding: 30px;
-    border-color: black;
+.search.button:hover {
+    color: black;
 }
 
 .settings-button {
-    background-color: transparent;
+    background-color: lightgrey;
     color: white;
     border: 0px;
-    font-size: 24px;
+    font-size: 18px;
     padding: 10px;
-    font-weight: 2px;
-    flex-basis: 100%;
     cursor: pointer;
 }
 
@@ -85,12 +71,11 @@ li:hover {
     background-size: 30px;
 }
 
-.search.button:hover {
-    color: black;
+ul {
+    padding: 0px;
 }
 
 li {
-    padding: 0px 0px 0px 0px;
     list-style: none;
     background-image: url("images/checkmark.png");
     background-repeat: no-repeat;
@@ -102,3 +87,5 @@ p {
     color: black;
     font-size: 16px;
 }
+
+/* need to add flexbox to this to better arrange the page */

@@ -18,6 +18,7 @@ function clickedWebsite(websiteObj) {
         if (result === true) {
             websiteSet.delete(content);
             websiteObj.remove();
+            document.getElementById("output").innerHTML='';
         }
 }
 
