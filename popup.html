@@ -14,10 +14,20 @@
     </div>
     <div class="timer">
         <form class="input-time">
-            <input id="hours" type="number" placeholder="Hours" min="0">
-            <input id="minutes" type="number" placeholder="Minutes" min="0">
+            <input id="minutes" type="number" placeholder="Minutes" min="0" required>
+            <div class="time">
+            <!-- <label for="myTime">.min</label>
+            <input list="timespan" placeholder="Minutes" id="myTime">
+            <datalist id="timespan">
+                <option value="5 min">5 min</option>
+                <option value="10 min">10 min</option>
+                <option value="15 min">15 min</option>
+                <option value="20 min">20 min</option>
+                <option value="25 min">25 min</option>
+            </datalist> -->
+            </div>
+            <button class="on">ON</button>
         </form>
-        <button class="on">ON</button>
     </div>
         <a href="settings.html" target="_blank">
         <button class="settings-button">Settings</button></a>

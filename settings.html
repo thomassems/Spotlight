@@ -9,20 +9,26 @@
     <script src="scripts/main.js" defer></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="name">Productivity Extension</div>
+    <div class="navbar-container">
+        <div class="title">Productivity Extension</div>
         <img src="images/logo.png" alt="Logo" class="logo">
     </div>
-    <form id="form">
-    <input type="text" id="userInput" class="search" placeholder="Website" required>
-    <button id="buttonClick" type="reset" class="search button">Add Website</button>
-    </form>
-    <p id="output"></p>
-    <ul id="websites">
-        <li>netflix.com</li>
-        <li>twitter.com</li>
-        <li>instagram.com</li>
-    </ul>
+    <div class="form-container">
+        <form id="form">
+        <input type="text" id="userInput" class="search" placeholder="Website" size="22" required>
+        <button id="buttonClick" type="reset" class="search button">Add Website</button>
+        </form>
+    </div>
+    <div class="message">
+        <p id="output"></p>
+    </div>
+    <div class="website-container">
+        <ul id="websites">
+            <li>netflix.com</li>
+            <li>twitter.com</li>
+            <li>instagram.com</li>
+        </ul>
+    </div>
 </body>
 </html>
 <!--Will also need to check somewhere if the website is valid, like no spaces, etc;-->

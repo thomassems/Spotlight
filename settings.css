@@ -2,21 +2,21 @@ body {
     margin: 0px;
     padding: 0px;
     background-image: linear-gradient(90deg, rgb(5, 250, 160), turquoise);
-    background-color: white;
-    color: white;
     text-align: center;
 }
 
 
-.navbar {
+.navbar-container {
     background-color:white;
-    color: white;
     font-size: 50px;
-    padding: 20px;
-    margin: 0px, 0px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
-.navbar .name {
+.title {
     background-image: linear-gradient(90deg, rgb(5, 250, 169), turquoise);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -26,42 +26,53 @@ body {
     
 }
 
-.navbar .logo {
+.logo {
     width: 50px;
     height: 50px;
 }
 
-.search {
+.form-container {
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search {
     background-color: white;
     border-color: darkgreen;
     font-size: 20px;
     color: turquoise;
     border-width: 3px;
+    margin-bottom: 10px;
 }
 
-.search.button {
+.button {
     cursor: pointer;
 }
 
-.search.button:hover {
+.button:hover {
     color: black;
 }
 
-.settings-button {
-    background-color: lightgrey;
+.message {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     color: white;
-    border: 0px;
-    font-size: 18px;
-    padding: 10px;
-    cursor: pointer;
 }
 
+.website-container {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
 
 #websites {
     font-size: 25px;
     line-height: 50px;
-    color: black;
+    padding: 0px;
+    margin: 0px;
 }
 
 li:hover {
@@ -71,21 +82,19 @@ li:hover {
     background-size: 30px;
 }
 
-ul {
-    padding: 0px;
-}
 
 li {
+    padding: 0px 100px 0px 100px;
     list-style: none;
-    background-image: url("images/checkmark.png");
+    background: url(images/checkmark.png);
     background-repeat: no-repeat;
-    background-position: 70%;
+    background-position: right;
     background-size: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 p {
     color: black;
     font-size: 16px;
 }
-
-/* need to add flexbox to this to better arrange the page */
