@@ -37,7 +37,7 @@ function websitePrefix(prefix) {
 }
 
 function websiteSuffix(suffix) {
-    if (suffix === '') {
+    if (!suffix) {
         return null;
     }
     let suff = '';
@@ -51,7 +51,7 @@ function websiteSuffix(suffix) {
 }
 
 function websiteValidater(website) {
-    if (website === '') {
+    if (!website) {
         return null;
     }
     else {
@@ -75,7 +75,6 @@ const btn = document.getElementById("buttonClick");
 function addWebsite() {
     const output = document.getElementById("output");
     const website = websiteValidater(text.value);
-    console.log(website);
     if (website === null) {
         output.innerHTML = "Please provide a valid website";
     }
@@ -83,21 +82,43 @@ function addWebsite() {
         output.innerHTML = "This website is already included in the blocklist";
     }
     else {
-        var node = document.createElement('li');
+        let node = document.createElement('li');
         node.appendChild(document.createTextNode(website));
         document.querySelector('ul').appendChild(node);
         output.innerHTML = `${website} was successfully added to the website blocklist`;
         websiteSet.add(website);
         websiteClick(node);
     }
-};
+}
 
 btn.addEventListener("click", addWebsite);
 
-const form = document.getElementById("form"); // works but should try to change it so you can add websites to blocklist using return key
+const form = document.getElementById("form");
 function handleForm(returnKey) {
     returnKey.preventDefault();
 }
 form.addEventListener('submit', handleForm);
 
-/* need to remove the item from local storage too*/
+// const memeImage = document.querySelector("img");
+
+// myImage.onclick = () => {
+//   const src = memeImage.getAttribute("src");
+//   if (src === "images/onboarding1.jpg") {
+//     memeImage.setAttribute("src", "images/onboarding2.jpg");
+//   }
+//   else if (src === "images/onboarding2.jpg") {
+//     memeImage.setAttribute("src", "images/onboarding3.jpg");
+//   } 
+//   else if (src === "images/onboarding3.jpg") {
+//     memeImage.setAttribute("src", "images/onboarding4.jpg");
+//   }
+//   else if (src === "images/onboarding4.jpg") {
+//     memeImage.setAttribute("src", "images/onboarding5.jpg");
+//   }
+//   else if (src === "images/onboarding5.jpg"){
+//     memeImage.setAttribute("src", "images/onboarding6.jpg");
+//   }
+//   else{
+//     memeImage.setAttribute("src", "images/onboarding1.jpg");
+//   }
+// }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Popup Bar</title>
     <link rel="stylesheet" href="popup.css">
+    <script src="scripts/popup.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -13,21 +14,14 @@
         Productivity Extension
     </div>
     <div class="timer">
-        <form class="input-time">
-            <input id="minutes" type="number" placeholder="Minutes" min="0" required>
-            <div class="time">
-            <!-- <label for="myTime">.min</label>
-            <input list="timespan" placeholder="Minutes" id="myTime">
-            <datalist id="timespan">
-                <option value="5 min">5 min</option>
-                <option value="10 min">10 min</option>
-                <option value="15 min">15 min</option>
-                <option value="20 min">20 min</option>
-                <option value="25 min">25 min</option>
-            </datalist> -->
-            </div>
-            <button class="on">ON</button>
-        </form>
+        <img src="images/logo.png" id="logoButton" class="on">
+        <div class="timer-container">
+            <form class="input-time">
+                <button type="button" id="leftArrow" class="arrows">&#8249</button>
+                <div id="time" class="time">10:00</div>
+                <button type="button" id = "rightArrow" class="arrows">&#8250</button>
+            </form>
+        </div>
     </div>
         <a href="settings.html" target="_blank">
         <button class="settings-button">Settings</button></a>
