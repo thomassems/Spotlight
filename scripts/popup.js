@@ -1,20 +1,19 @@
 const left = document.getElementById("leftArrow");
-const time = document.getElementById("time");
 const right = document.getElementById("rightArrow");
+const time = document.getElementById("time");
 const logoButton = document.getElementById("logoButton");
-const leftArrContainer = document.getElementById("lArrow");
-const rightArrContainer = document.getElementById("rArrow");
 let mins = Number(time.textContent.split(":")[0]);
 let secs = Number(time.textContent.split(":")[1]);
 let productiveTime = 0;
+
 left.addEventListener("click", leftUpdater);
 right.addEventListener("click", rightUpdater);
 logoButton.addEventListener("click", startTimer)
 
 function leftUpdater() {
-    if (time.textContent != "1:00") { // should be 5:00
-        time.innerHTML = `${mins - 1}:00`; // should be mins - 5, just changed it for testing purposes
-        mins -= 1; // mins -= 5
+    if (time.textContent != "5:00") {
+        mins -= 5;
+        time.innerHTML = `${mins}:00`;
     }
 }
 
@@ -55,7 +54,7 @@ function timer(startTime, startMins, intervalVar) {
     }
 
     if (timerMins < 0) {
-        alert(`Congrats on being productive for ${startMins} minutes`);
+        alert(`Congratulations on maintaining a productive streak for ${startMins} minutes! Keep up the great work!`);
         clearTimer(startMins, intervalVar);
         updateProductiveTime(startMins);
     }
@@ -68,23 +67,23 @@ function clearTimer(startMins, intervalVar) {
 }
 
 function updateProductiveTime(prodTime) {
-    const output = document.getElementById("output");
+    let output = document.getElementById("output");
     productiveTime += prodTime;
     prodHours = Math.floor(productiveTime / 60);
-    prodMins = prodTime - (prodHours * 60);
+    prodMins = productiveTime - (prodHours * 60);
     let textHours = "hours";
     if (prodHours === 1) {
         textHours = "hour";
     }
 
     if (prodHours > 0 && prodMins > 0) {
-        output.innerHTML = `Congrats on being productive for ${hours} ${textHours} and ${prodMins} minutes`
+        output.innerHTML = `You have been productive for ${hours} ${textHours} and ${prodMins} minutes today`
     }
     else if (prodHours === 0) {
-        output.innerHTML = `Congrats on being productive for ${prodMins} minutes`
+        output.innerHTML = `You have been productive for ${prodMins} minutes today`
     }
     else {
-        output.innerHTML = `Congrats on being productive for ${prodHours} ${textHours}`
+        output.innerHTML = `You have been productive for ${prodHours} ${textHours} today`
     }
 }
 
@@ -94,6 +93,5 @@ function displayArrows() {
 }
 
 // when logo is clicked, the extension should be activated, and it should remain active as you flip tabs
-// once the timer ends, should add a popup message saying congrats, and then when they click ok everything is reset back to their default time
+// also need to use local storage to save some of the data
 // need the time you have been productive for to clear every 24 hours
-// need to fix it that so the page doesn't refresh on arrow click after the timer is brought back to its original state
