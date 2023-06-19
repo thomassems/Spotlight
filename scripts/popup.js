@@ -28,9 +28,13 @@ function rightUpdater() {
 function startTimer () {
     const startMins = mins;
     let startingTime = new Date().getTime();
-    left.parentNode.removeChild(left);
-    right.parentNode.removeChild(right);
+    hideArrows();
     const interval = setInterval(function() { timer(startingTime, startMins, interval); });
+}
+
+function hideArrows() {
+    left.style.display = 'none';
+    right.style.display = 'none';
 }
 
 function timer(startTime, startMins, intervalVar) {
@@ -59,14 +63,7 @@ function timer(startTime, startMins, intervalVar) {
 
 function clearTimer(startMins, intervalVar) {
     time.innerHTML = `${startMins}:00`;
-    let leftAr = document.createElement("button");
-    leftAr.className = "arrows";
-    let rightAr = document.createElement("button");
-    rightAr.className = "arrows";
-    leftAr.innerHTML = '&#8249';
-    leftArrContainer.appendChild(leftAr);
-    rightAr.innerHTML = '&#8250';
-    rightArrContainer.appendChild(rightAr);
+    displayArrows();
     clearInterval(intervalVar);
 }
 
@@ -75,7 +72,7 @@ function updateProductiveTime(prodTime) {
     productiveTime += prodTime;
     prodHours = Math.floor(productiveTime / 60);
     prodMins = prodTime - (prodHours * 60);
-    let textMins = "hours";
+    let textHours = "hours";
     if (prodHours === 1) {
         textHours = "hour";
     }
@@ -91,6 +88,12 @@ function updateProductiveTime(prodTime) {
     }
 }
 
+function displayArrows() {
+    right.style.display = 'inline';
+    left.style.display = 'inline';
+}
+
 // when logo is clicked, the extension should be activated, and it should remain active as you flip tabs
 // once the timer ends, should add a popup message saying congrats, and then when they click ok everything is reset back to their default time
 // need the time you have been productive for to clear every 24 hours
+// need to fix it that so the page doesn't refresh on arrow click after the timer is brought back to its original state
