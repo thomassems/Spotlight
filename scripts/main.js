@@ -1,4 +1,17 @@
-const websiteSet = new Set(["netflix.com", "twitter.com", "instagram.com"]);
+if (localStorage.getItem("websiteArray") === null) {
+    const websiteArr = ["netflix.com", "twitter.com", "instagram.com"];
+    const stringArr = JSON.stringify(websiteArr);
+    localStorage.setItem('websiteArray', stringArr);
+}
+let websitesFromStorage = localStorage.getItem('websiteArray');
+let arrayParsed = JSON.parse(websitesFromStorage);
+
+
+for (let i =0; i < arrayParsed.length; i ++) {
+    if (arrayParsed[i] != null) {
+        addSite(arrayParsed[i]);
+    }
+}
 
 document.querySelectorAll('li').forEach(item => {
      item.addEventListener("click", () => {
@@ -16,7 +29,15 @@ function clickedWebsite(websiteObj) {
     const content = websiteObj.textContent;
     let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
         if (result === true) {
-            websiteSet.delete(content);
+            let arr = localStorage.getItem('websiteArray');
+            let parsed = JSON.parse(arr);
+            for (let i = 0; i < parsed.length; i++) {
+                if (parsed[i] === content) {
+                    delete parsed[i];
+                }
+        }
+            stringArray = JSON.stringify(parsed);
+            localStorage.setItem('websiteArray', stringArray);
             websiteObj.remove();
             document.getElementById("output").innerHTML='';
         }
@@ -78,17 +99,25 @@ function addWebsite() {
     if (website === null) {
         output.innerHTML = "Please provide a valid website";
     }
-    else if (websiteSet.has(website)) {
+    else if (arrayParsed.has(website)) {
         output.innerHTML = "This website is already included in the blocklist";
     }
     else {
         let node = document.createElement('li');
         node.appendChild(document.createTextNode(website));
         document.querySelector('ul').appendChild(node);
-        output.innerHTML = `${website} was successfully added to the website blocklist`;
-        websiteSet.add(website);
+        arrayParsed.push(website);
+        let websiteArra = JSON.stringify(arrayParsed);
+        localStorage.setItem('websiteArray', websiteArra)
         websiteClick(node);
+        output.innerHTML = `${website} was successfully added to the website blocklist`;
     }
+}
+
+function addSite(site) {
+    let node = document.createElement('li');
+    node.appendChild(document.createTextNode(site));
+    document.querySelector('ul').appendChild(node);
 }
 
 btn.addEventListener("click", addWebsite);
@@ -122,3 +151,6 @@ form.addEventListener('submit', handleForm);
 //     memeImage.setAttribute("src", "images/onboarding1.jpg");
 //   }
 // }
+
+// idea: save an array in local storage that has the 3 websites. Once those 3 websites have been added to local storage, remove the first array from local storage.
+// then you will just display whatever is in the 2nd local storage

@@ -6,14 +6,24 @@ let mins = Number(time.textContent.split(":")[0]);
 let secs = Number(time.textContent.split(":")[1]);
 let productiveTime = 0;
 
+if (localStorage.getItem("prodTime") === undefined) {
+    localStorage.setItem("prodTime", "0")
+}
+
 left.addEventListener("click", leftUpdater);
 right.addEventListener("click", rightUpdater);
-logoButton.addEventListener("click", startTimer)
+logoButton.addEventListener("click", startTimer);
+let prod = Number(localStorage.getItem('prodTime'));
+document.getElementById("output").innerHTML = `You have been productive for ${prod} minutes today`
 
 function leftUpdater() {
-    if (time.textContent != "5:00") {
-        mins -= 5;
+    if (time.textContent != "1:00") {
+        mins -= 1;
         time.innerHTML = `${mins}:00`;
+        right.style.opacity = "100%";
+    }
+    if (mins === 5) {
+        left.style.opacity = "50%";
     }
 }
 
@@ -21,6 +31,10 @@ function rightUpdater() {
     if (time.textContent != "120:00") {
         time.innerHTML = `${mins + 5}:00`;
         mins += 5;
+        left.style.opacity = "100%";
+    }
+    if (mins === 120) {
+        right.style.opacity = "50%";
     }
 }
 
@@ -29,6 +43,7 @@ function startTimer () {
     let startingTime = new Date().getTime();
     hideArrows();
     const interval = setInterval(function() { timer(startingTime, startMins, interval); });
+    currProd = Number(localStorage.getItem("prodTime"));
 }
 
 function hideArrows() {
@@ -68,23 +83,26 @@ function clearTimer(startMins, intervalVar) {
 
 function updateProductiveTime(prodTime) {
     let output = document.getElementById("output");
-    productiveTime += prodTime;
-    prodHours = Math.floor(productiveTime / 60);
-    prodMins = productiveTime - (prodHours * 60);
-    let textHours = "hours";
-    if (prodHours === 1) {
-        textHours = "hour";
-    }
+    let timey = currProd + prodTime;
+    localStorage.setItem('prodTime', toString(timey));
+    // productiveTime += prodTime;
+    // prodHours = Math.floor(productiveTime / 60);
+    // prodMins = productiveTime - (prodHours * 60);
+    // let textHours = "hours";
+    // if (prodHours === 1) {
+    //     textHours = "hour";
+    // }
 
-    if (prodHours > 0 && prodMins > 0) {
-        output.innerHTML = `You have been productive for ${hours} ${textHours} and ${prodMins} minutes today`
-    }
-    else if (prodHours === 0) {
-        output.innerHTML = `You have been productive for ${prodMins} minutes today`
-    }
-    else {
-        output.innerHTML = `You have been productive for ${prodHours} ${textHours} today`
-    }
+    // if (prodHours > 0 && prodMins > 0) {
+    //     output.innerHTML = `You have been productive for ${hours} ${textHours} and ${prodMins} minutes today`
+    // }
+    // else if (prodHours === 0) {
+    //     output.innerHTML = `You have been productive for ${prodMins} minutes today`
+    // }
+    // else {
+    //     output.innerHTML = `You have been productive for ${prodHours} ${textHours} today`
+    // }
+    output.innerHTML = `You have been productive for ${timey} minutes today`;
 }
 
 function displayArrows() {
@@ -92,6 +110,7 @@ function displayArrows() {
     left.style.display = 'inline';
 }
 
-// when logo is clicked, the extension should be activated, and it should remain active as you flip tabs
+// extension should remain active as you flip tabs
 // also need to use local storage to save some of the data
 // need the time you have been productive for to clear every 24 hours
+// use chrome local storage
