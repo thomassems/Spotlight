@@ -6,8 +6,12 @@ let mins = Number(time.textContent.split(":")[0]);
 let secs = Number(time.textContent.split(":")[1]);
 let productiveTime = 0;
 
-if (localStorage.getItem("prodTime") === undefined) {
+if (localStorage.getItem("prodTime") === null) {
     localStorage.setItem("prodTime", "0")
+}
+
+if (localStorage.getItem("mins") != 0 || localStorage.getItem("secs") != 0) {
+
 }
 
 left.addEventListener("click", leftUpdater);
@@ -43,7 +47,6 @@ function startTimer () {
     let startingTime = new Date().getTime();
     hideArrows();
     const interval = setInterval(function() { timer(startingTime, startMins, interval); });
-    currProd = Number(localStorage.getItem("prodTime"));
 }
 
 function hideArrows() {
@@ -51,13 +54,17 @@ function hideArrows() {
     right.style.display = 'none';
 }
 
+window.onbeforeunload = timer;
+
 function timer(startTime, startMins, intervalVar) {
     let currTime = new Date().getTime();
     let distance = currTime - startTime;
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     const timerMins = mins - minutes - 1;
+    localStorage.setItem("mins", timerMins);
     const timerSecs = secs - seconds + 59;
+    localStorage.setItem("secs", timerSecs);
     if (timerSecs < 10) {
         time.innerHTML = `${timerMins}:0${timerSecs}`; 
     }
@@ -82,27 +89,26 @@ function clearTimer(startMins, intervalVar) {
 }
 
 function updateProductiveTime(prodTime) {
-    let output = document.getElementById("output");
+    let outputs = document.getElementById("output");
+    let currProd = Number(localStorage.getItem("prodTime"));
     let timey = currProd + prodTime;
-    localStorage.setItem('prodTime', toString(timey));
-    // productiveTime += prodTime;
-    // prodHours = Math.floor(productiveTime / 60);
-    // prodMins = productiveTime - (prodHours * 60);
-    // let textHours = "hours";
-    // if (prodHours === 1) {
-    //     textHours = "hour";
-    // }
+    localStorage.setItem('prodTime', timey);
+    prodHours = Math.floor(timey / 60);
+    prodMins = productiveTime - (prodHours * 60);
+    let textHours = "hours";
+    if (prodHours === 1) {
+        textHours = "hour";
+    }
 
-    // if (prodHours > 0 && prodMins > 0) {
-    //     output.innerHTML = `You have been productive for ${hours} ${textHours} and ${prodMins} minutes today`
-    // }
-    // else if (prodHours === 0) {
-    //     output.innerHTML = `You have been productive for ${prodMins} minutes today`
-    // }
-    // else {
-    //     output.innerHTML = `You have been productive for ${prodHours} ${textHours} today`
-    // }
-    output.innerHTML = `You have been productive for ${timey} minutes today`;
+    if (prodHours > 0 && prodMins > 0) {
+        outputs.innerHTML = `You have been productive for ${hours} ${textHours} and ${prodMins} minutes today`
+    }
+    else if (prodHours === 0) {
+        outputs.innerHTML = `You have been productive for ${prodMins} minutes today`
+    }
+    else {
+        outputs.innerHTML = `You have been productive for ${prodHours} ${textHours} today`
+    }
 }
 
 function displayArrows() {
