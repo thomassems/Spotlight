@@ -1,24 +1,10 @@
 const left = document.getElementById("leftArrow");
 const right = document.getElementById("rightArrow");
-const time = document.getElementById("time");
 const logoButton = document.getElementById("logoButton");
-let mins = Number(time.textContent.split(":")[0]);
-let secs = Number(time.textContent.split(":")[1]);
-let productiveTime = 0;
-
-if (localStorage.getItem("prodTime") === null) {
-    localStorage.setItem("prodTime", "0")
-}
-
-if (localStorage.getItem("mins") != 0 || localStorage.getItem("secs") != 0) {
-
-}
 
 left.addEventListener("click", leftUpdater);
 right.addEventListener("click", rightUpdater);
 logoButton.addEventListener("click", startTimer);
-let prod = Number(localStorage.getItem('prodTime'));
-document.getElementById("output").innerHTML = `You have been productive for ${prod} minutes today`
 
 function leftUpdater() {
     if (time.textContent != "1:00") {
@@ -42,11 +28,67 @@ function rightUpdater() {
     }
 }
 
+const time = document.getElementById("time");
+
+
+let mins = Number(time.textContent.split(":")[0]);
+let secs = Number(time.textContent.split(":")[1]);
+
+if (localStorage.getItem("prodTime") === null) {
+    let date = new Date().getDate();
+    let prodArr = ["0", {date}];
+    let prodStr = JSON.stringify(prodArr);
+    localStorage.setItem("prodTime", prodStr);
+}
+
+let dateToday = new Date().getDate();
+if (dateToday != getDate()) {
+    prodTimeStr = JSON.stringify(["0", {dateToday}]);
+    localStorage.setItem("prodTime", prodTimeStr);
+}
+
+if (localStorage.getItem("mins") != 0 || localStorage.getItem("secs") != 0) {
+    let timeMins = Number(localStorage.getItem("timerMins"));
+    let timeSecs = Number(localStorage.getItem("timerSecs"));
+    let currTime = new Date().getTime();
+    let distance = currTime - dateToday;
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // let minsLeft = 
+
+    const interval = setInterval(function() { timer(currTime, startMins, interval); });
+    // const 
+    
+    interval = setInterval(function() { timer(startingTime, startMins, interval); });
+}
+
+// also need to do sth if the above values are 0
+
+function getDate() {
+    let prodStrs = (localStorage.getItem("prodTime"));
+    let prodParsed = JSON.parse(prodStrs);
+    let date = prodParsed[1].date;
+    return date;
+}
+
+function getProdTime() {
+    let prodStrs = (localStorage.getItem("prodTime"));
+    let prodParsed = JSON.parse(prodStrs);
+    let prod = Number(prodParsed[0]);
+    return prod;
+}
+
+let prodStrs = (localStorage.getItem("prodTime"));
+let prodParsed = JSON.parse(prodStrs);
+let prod = Number(prodParsed[0]);
+document.getElementById("output").innerHTML = `You have been productive for ${getProdTime()} minutes today`
+
 function startTimer () {
     const startMins = mins;
+    const startSecs = secs;
     let startingTime = new Date().getTime();
     hideArrows();
-    const interval = setInterval(function() { timer(startingTime, startMins, interval); });
+    const interval = setInterval(function() { timer(startingTime, startMins, startSecs, interval); });
 }
 
 function hideArrows() {
@@ -56,7 +98,7 @@ function hideArrows() {
 
 window.onbeforeunload = timer;
 
-function timer(startTime, startMins, intervalVar) {
+function timer(startTime, startMins, startSecs, intervalVar) {
     let currTime = new Date().getTime();
     let distance = currTime - startTime;
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -65,6 +107,7 @@ function timer(startTime, startMins, intervalVar) {
     localStorage.setItem("mins", timerMins);
     const timerSecs = secs - seconds + 59;
     localStorage.setItem("secs", timerSecs);
+    localStorage.setItem("date", currTime);
     if (timerSecs < 10) {
         time.innerHTML = `${timerMins}:0${timerSecs}`; 
     }
@@ -90,11 +133,14 @@ function clearTimer(startMins, intervalVar) {
 
 function updateProductiveTime(prodTime) {
     let outputs = document.getElementById("output");
-    let currProd = Number(localStorage.getItem("prodTime"));
+    let currProd = getProdTime();
     let timey = currProd + prodTime;
-    localStorage.setItem('prodTime', timey);
+    let date = new Date().getDate();
+    let prodArr = [`${timey}`, {date}];
+    let prodStr = JSON.stringify(prodArr);
+    localStorage.setItem("prodTime", prodStr);
     prodHours = Math.floor(timey / 60);
-    prodMins = productiveTime - (prodHours * 60);
+    prodMins = timey - (prodHours * 60);
     let textHours = "hours";
     if (prodHours === 1) {
         textHours = "hour";
@@ -115,8 +161,3 @@ function displayArrows() {
     right.style.display = 'inline';
     left.style.display = 'inline';
 }
-
-// extension should remain active as you flip tabs
-// also need to use local storage to save some of the data
-// need the time you have been productive for to clear every 24 hours
-// use chrome local storage
