@@ -1,6 +1,5 @@
 if (localStorage.getItem("websiteArray") === null) {
-    const websiteArr = ["netflix.com", "twitter.com", "instagram.com"];
-    const stringArr = JSON.stringify(websiteArr);
+    const stringArr = JSON.stringify(["netflix.com", "twitter.com", "instagram.com"]);
     localStorage.setItem('websiteArray', stringArr);
 }
 
@@ -31,21 +30,19 @@ function clickedWebsite(websiteObj) {
 
 function websiteValidator(website) {
     const re = /([a-z]+\.)+([a-z]+\.*)*/g;
-    let match = (website.match(re))[0];
-    console.log(match.slice(0, 4));
+    let match = (website.match(re));
     if (match) {
-        if (match.slice(0, 4) === 'www.') {
-            return match.slice(4)
+        if (match[0].slice(0, 4) === 'www.') {
+            return match[0].slice(4)
         }
         else {
-            return match;
+            return match[0];
         }
     }
     return null;
 }
 
 const text = document.getElementById("userInput");
-const btn = document.getElementById("buttonClick");
 function addWebsite() {
     const output = document.getElementById("output");
     const website = websiteValidator(text.value);
@@ -73,10 +70,12 @@ function addSite(site) {
     websiteClick(node);
 }
 
+const btn = document.getElementById("buttonClick");
 btn.addEventListener("click", addWebsite);
 
 const form = document.getElementById("form");
 function handleForm(returnKey) {
     returnKey.preventDefault();
 }
+
 form.addEventListener('submit', handleForm);
