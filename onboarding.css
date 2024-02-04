@@ -1,0 +1,24 @@
+* {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+.video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+iframe {
+    border: 5px solid white;
+}
+
+p {
+    margin-top: 80px;
+    font-size: 30px;
+}

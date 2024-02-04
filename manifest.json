@@ -1,17 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "Productivity Extension",
+    "name": "Spotlight",
     "version": "1.0",
     "action": {
         "default_icon": {
             "16": "images/logo.png"
         },
-        "default_title": "Productivity Extension is enabled",
+        "default_title": "Spotlight is enabled",
         "default_popup": "popup.html"
     },
-    "description": "Allows you to block off time to get your work done. When you try to access a non-productive website from your blocklist, you will be automatically redirected to a meme telling you to get back to work.",
+    "description": "Elevate your productivity by setting timers for focused work and preventing access to distracting websites",
     "background": {
-        "service_worker": "./scripts/background.js",
+        "service_worker": "/scripts/background.js",
         "type": "module"
     },
     "permissions": [
@@ -19,7 +19,8 @@
         "webNavigation",
         "declarativeNetRequest" ,
         "activeTab",
-        "scripting"
+        "scripting",
+        "webRequest"
     ],
     "icons": {
         "16": "images/logo.png",

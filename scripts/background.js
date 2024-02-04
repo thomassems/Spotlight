@@ -1,39 +1,51 @@
-// importScripts("/main.js");
+chrome.runtime.onInstalled.addListener(() => {
+  if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register('background.js')
+  .then((registration) => {
+    console.log('Service worker registered with scope:', registration);
+  })
+  .catch((error) => {
+    console.error('Service worker failed', error);
+  });}
+});
 
-// import {websiteValidater} from "./main.js";
+let arr;
 
-// chrome.runtime.onInstalled.addListener(() => {
-//     ul {
-//     padding: 0px;
-// }
-// }); 
-// chrome.action.setBackgroundColor(
-//     {color: [0, 255, 0, 0]},  // Green
-//     () => { /* ... */ },
-//   );
+chrome.storage.local.get(["websiteKey"]).then((result) => {
+  arr = result.websiteKey;
+});
 
-// chrome.storage.local.set({key: value}).then(() => {
-//     console.log(websiteValidater('youtube.ca'));
-// });
+chrome.storage.local.onChanged.addListener(()=> {
+  chrome.storage.local.get(["websiteKey"]).then((result) => {
+    arr = result.websiteKey;
+  });
+})
 
-const arr = ["https://www.youtube.com"]
-const extensions = 'https://developer.chrome.com/docs/extensions'
-const webstore = 'https://developer.chrome.com/docs/webstore'
-
-// chrome.action.onClicked.addListener(async (tab) => {
-//   if (arr.has(tab.url)) {
-//     document.body.style.backgroundColor = 'red';
-//   }
-// });
-function reddenPage() {
-  document.body.style.backgroundColor = 'red';
-}
-
-chrome.action.onClicked.addListener((tab) => {
-  if (tab.url.includes('google')) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: reddenPage
-    });
+self.addEventListener('message', function(event) {
+  if (event.data.websiteKey) {
+    arr = event.data.websiteKey;
   }
 });
+
+chrome.webNavigation.onCompleted.addListener((e) => {
+    if (arr && arr.includes(websiteValidator(String(e.url)))) {
+      chrome.tabs.update(e.Id, {url: "/onboarding.html"})
+    };
+    
+  });
+
+function websiteValidator(website) {
+  const re = /([a-z]+\.)+([a-z]+\.*)*/g;
+  let match = (website.match(re));
+  if (match) {
+      if (match[0].slice(0, 4) === 'www.') {
+          return match[0].slice(4)
+      }
+      else {
+          return match[0];
+      }
+  }
+  return null;
+}
+
+chrome.webRequest.onBeforeRequest

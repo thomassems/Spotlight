@@ -1,11 +1,20 @@
-if (localStorage.getItem("websiteArray") === null) {
-    const stringArr = JSON.stringify(["netflix.com", "twitter.com", "instagram.com"]);
-    localStorage.setItem('websiteArray', stringArr);
+let savedWebsites;
+
+function initializeDefaultWebsites() {
+    chrome.storage.local.get(["websiteKey"], (result) => {
+        if (Object.keys(result).length === 0) {
+            const defaultWebsites = ["netflix.com", "twitter.com", "instagram.com"];
+            chrome.storage.local.set({ websiteKey: defaultWebsites }, () => {
+                console.log("Default websites have been initialized.");
+            });
+        } else {
+            savedWebsites = result.websiteKey;
+        }
+        result.websiteKey.forEach(addSite);
+    });
 }
 
-let websitesFromStorage = localStorage.getItem('websiteArray');
-let arrayParsed = JSON.parse(websitesFromStorage);
-arrayParsed.forEach(addSite);
+initializeDefaultWebsites();
 
 function websiteClick(website) {
     website.addEventListener("click", () => {
@@ -13,23 +22,8 @@ function websiteClick(website) {
     });
 }
 
-function clickedWebsite(websiteObj) {
-    const content = websiteObj.textContent;
-    let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
-        if (result === true) {
-            let arr = localStorage.getItem('websiteArray');
-            let parsed = JSON.parse(arr);
-            const index = parsed.indexOf(content);
-            parsed.splice(index, 1);
-            stringArray = JSON.stringify(parsed);
-            localStorage.setItem('websiteArray', stringArray);
-            websiteObj.remove();
-            document.getElementById("output").innerHTML='';
-        }
-}
-
 function websiteValidator(website) {
-    const re = /([a-z]+\.)+([a-z]+\.*)*/g;
+    const re = /([a-z]+\.)+([a-z]+\.*)/g;
     let match = (website.match(re));
     if (match) {
         if (match[0].slice(0, 4) === 'www.') {
@@ -40,27 +34,6 @@ function websiteValidator(website) {
         }
     }
     return null;
-}
-
-const text = document.getElementById("userInput");
-function addWebsite() {
-    const output = document.getElementById("output");
-    const website = websiteValidator(text.value);
-    let storedArray = localStorage.getItem('websiteArray');
-    if (website === null) {
-        output.innerHTML = "Please provide a valid website";
-    }
-    else if (storedArray.includes(website)) {
-        output.innerHTML = "This website is already included in the blocklist";
-    }
-    else {
-        let storedParsed = JSON.parse(storedArray);
-        storedParsed.push(website);
-        addSite(website);
-        let websiteArra = JSON.stringify(storedParsed);
-        localStorage.setItem('websiteArray', websiteArra)
-        output.innerHTML = `${website} was successfully added to the website blocklist`;
-    }
 }
 
 function addSite(site) {
@@ -79,3 +52,33 @@ function handleForm(returnKey) {
 }
 
 form.addEventListener('submit', handleForm);
+
+function clickedWebsite(websiteObj) {
+    const content = websiteObj.textContent;
+    let result = confirm(`Are you sure you want to delete "${content}" from the blocklist?`);
+        if (result === true) {
+            let index = savedWebsites.indexOf(content);
+            savedWebsites.splice(index, 1);
+            chrome.storage.local.set({websiteKey:savedWebsites});
+            websiteObj.remove();
+            document.getElementById("output").innerHTML='';
+        }
+}
+
+const text = document.getElementById("userInput");
+function addWebsite() {
+    const output = document.getElementById("output");
+    const website = websiteValidator(text.value);
+    if (website === null) {
+        output.innerHTML = "Please provide a valid website";
+    }
+    else if (savedWebsites.includes(website)) {
+        output.innerHTML = "This website is already included in the blocklist";
+    }
+    else {
+        savedWebsites.push(website);
+        addSite(website);
+        chrome.storage.local.set({websiteKey:savedWebsites});
+        output.innerHTML = `${website} was successfully added to the website blocklist`;
+    }
+}
