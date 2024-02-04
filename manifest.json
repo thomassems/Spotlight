@@ -7,7 +7,7 @@
             "16": "images/logo.png"
         },
         "default_title": "Spotlight is enabled",
-        "default_popup": "popup.html"
+        "default_popup": "/web/popup.html"
     },
     "description": "Elevate your productivity by setting timers for focused work and preventing access to distracting websites",
     "background": {

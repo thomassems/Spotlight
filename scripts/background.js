@@ -29,7 +29,7 @@ self.addEventListener('message', function(event) {
 
 chrome.webNavigation.onCompleted.addListener((e) => {
     if (arr && arr.includes(websiteValidator(String(e.url)))) {
-      chrome.tabs.update(e.Id, {url: "/onboarding.html"})
+      chrome.tabs.update(e.Id, {url: "../web/onboarding.html"})
     };
     
   });
