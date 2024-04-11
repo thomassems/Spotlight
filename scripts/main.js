@@ -3,7 +3,7 @@ let savedWebsites;
 function initializeDefaultWebsites() {
     chrome.storage.local.get(["websiteKey"], (result) => {
         if (Object.keys(result).length === 0) {
-            const defaultWebsites = ["netflix.com", "twitter.com", "instagram.com"];
+            const defaultWebsites = ["netflix.com", "twitter.com", "instagram.com", "facebook.com","tiktok.com", "primevideo.com", "hulu.com", "amazon.com", "youtube.com", "pinterest.com"];
             chrome.storage.local.set({ websiteKey: defaultWebsites }, () => {
                 console.log("Default websites have been initialized.");
             });
