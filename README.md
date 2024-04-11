@@ -1,4 +1,5 @@
 <img src="images/spotlight.png" width="400" height="400">
+
 ## **Spotlight - A Productivity Chrome Extension**
 **Spotlight** is your personal productivity partner, designed to help you maintain focus and stay on track with your goals. In the vast ocean of the internet, it's easy to get swept away by waves of distractions. Spotlight acts as your beacon, guiding you back to productivity by blocking access to websites you find distracting.
 
